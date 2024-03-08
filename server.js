@@ -8,7 +8,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors()); // Use cors middleware
+// Use cors middleware
+app.use(cors());
 app.use('/api/data', dataRoutes);
 
 // Route handler for the root URL

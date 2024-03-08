@@ -26,16 +26,20 @@ router.use(logRequestStart);
 // Add data controller
 router.post('/add', async (req, res, next) => {
   try {
-    const startTime = Date.now(); // Record start time
+    const startTime = Date.now();
     const newData = await Data.create(req.body);
-    addCount++; // Increment add count
-    const endTime = Date.now(); // Record end time
-    const executionTime = endTime - startTime; // Calculate execution time
-    res.status(201).json({ ...newData.toObject(), executionTime }); // Include execution time in the response
+    // Increment add count
+    addCount++; 
+    const endTime = Date.now();
+    // Calculate execution time 
+    const executionTime = endTime - startTime;
+    // Include execution time in the response
+    res.status(201).json({ ...newData.toObject(), executionTime });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-  next(); // Call next middleware to log request end time
+  // Call next middleware to log request end time
+  next();
 });
 
 // getall Ids controller
@@ -46,7 +50,7 @@ router.get('/getall', async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  next(); // Call next middleware to log request end time
+  next();
 });
 
 // Update data controller
@@ -67,17 +71,18 @@ router.put('/update/:id', async (req, res, next) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-  next(); // Call next middleware to log request end time
+  next();
 });
 
 // Count data controller
 router.get('/count', async (req, res, next) => {
   try {
-    res.json({ addCount, updateCount }); // Send both add and update counts
+    // Send both add and update counts
+    res.json({ addCount, updateCount });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-  next(); // Call next middleware to log request end time
+  next();
 });
 
 // Add middleware to log request end time for all routes
